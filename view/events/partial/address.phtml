@@ -1,0 +1,13 @@
+<?php $event = $this->event; ?>
+<?php $fulladdress = $event->getAddress() . " " . $event->getCity() . " " . $event->country; ?>
+<hr/>
+
+<?php echo $this->createMap(array('latitude' => $event->getLatitude(), 'longitude'  => $event->getLongitude()), 12)?>
+
+<div class="vcard-event">
+    <div class="fn location"><h4><i class="fa fa-map-marker"></i> <?php echo !empty($event->getPlace()) ? $event->getPlace() : $event->profile_name?></h4></div>
+    <div class="street-address"><a href="https://www.google.com/maps/place/<?php echo urlencode($fulladdress)?>" target="_blank"><i class="fa fa-location-arrow"></i> <?php echo $fulladdress; ?> (<?php echo $event->countrycode; ?>)</a> </div>
+    <?php if($event->getFile()): ?>
+        <span class="photo hidden"><?php echo $this->serverUrl() . $event->getFile() ?></span>
+    <?php endif; ?>
+</div>

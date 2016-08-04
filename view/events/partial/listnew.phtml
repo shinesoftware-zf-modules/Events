@@ -1,0 +1,89 @@
+<?php
+    $events = $this->events;
+    $today = new \Datetime("now");
+?>
+
+<?php if (!empty($events) && $events->count()): ?>
+    <ul class="event-list">
+
+        <?php foreach ($events as $event): ?>
+
+            <?php
+
+            $distance = $this->distance($event->getLatitude(), $event->getLongitude());
+            $start = $this->datetime($event->getStart(), "d M Y");
+            $end = $this->datetime($event->getEnd(), "d M Y");
+
+            $today = new \Datetime("now");
+            $eventstart = new \Datetime($event->getStart());
+
+            if ($event->getRecurrence()) {
+                $newRecurrence = $this->whenoccurrence($eventstart, $event->getRecurrence(), 1, true);
+                if (!empty($newRecurrence[0])) {
+                    $eventstart = $newRecurrence[0];
+                }
+            }
+
+            $interval = $today->diff($eventstart);
+            $recurrence = $this->recurrence($event->getStart(), $event->getEnd(), $event->getRecurrence());
+            $content = preg_replace("/<br\W*?\/>/", "\n", $event->getContent());
+            $content = strtolower($content);
+
+            ?>
+            <li>
+                <time title="<?php echo ($event->getRecurrence()) ? $recurrence : null; ?>" class="<?php echo ($interval->invert) ? "today" : ""; ?>" datetime="<?php echo $this->datetime($event->getStart(), "Y-M-dd kkmm") ?>">
+                    <span class="dayoftheweek"><?php echo $this->datetime($event->getStart(), "EEEE") ?></span>
+                    <span class="day"><?php echo $this->datetime($event->getStart(), "dd") ?></span>
+                    <span class="month"><?php echo $this->datetime($event->getStart(), "MMM") ?></span>
+                    <span class="year"><?php echo $this->datetime($event->getStart(), "Y") ?></span>
+                    <span class="time"><?php echo $this->datetime($event->getStart(), "kk:mm") ?></span>
+                </time>
+
+                <?php if($event->getFile()): ?>
+                    <img alt="<?php echo $event->getTitle()?>" src="<?php echo $event->getFile()?>" />
+                <?php endif; ?>
+
+                <div class="info">
+                    <h5 class="title"><a href="/events/<?php echo $event->getSlug(); ?>.html"><?php echo $this->Extract($event->getTitle(), 50); ?></a>
+                        <small><a href="/events/<?php echo $event->getSlug(); ?>.html"><?php echo $this->Extract($event->getAddress(), 20); ?></a></small>
+
+                    </h5>
+                    <?php echo ($event->getRecurrence()) ? '<span class="subtitle"><i class="fa fa-calendar"></i> ' . $recurrence . '</span>' : null; ?>
+                    <?php echo ($distance) ? '<span class="subtitle" title="'. $this->translate('distance of the event from you').'"><i class="fa fa-location-arrow"></i> ' . $distance . '</span>' : null; ?>
+                    <?php echo ($event->category) ? '<span class="subtitle"><i class="fa fa-bullseye"></i> ' . $event->category . '</span>' : null; ?>
+                    <div class="desc hidden-xs"><?php echo ucfirst($this->Extract($content, 200)); ?></div>
+                    <div class="desc visible-xs"><?php echo ucfirst($this->Extract($content, 400)); ?></div>
+                </div>
+
+                <div class="social">
+
+                    <ul class="nav nav-pills">
+
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="/events/export/ics/<?php echo $event->getId() ?>"><i class="fa fa-file"></i> <?php echo $this->translate('Export event')?></a></li>
+                                <li><a href="/profile/<?php echo $event->profile_name ?>.html"><i class="fa fa-user"></i> <?php echo sprintf($this->translate('Go to %s profile'), $event->profile_name) ?></a></li>
+
+                                <?php if(!empty($event->url)): ?>
+                                    <li><a href="<?php echo $event->url?>" target="_blank"><i class="fa fa-link"></i> <?php echo $this->translate('External link') ?></a> </li>
+                                <?php endif; ?>
+
+                            </ul>
+                        </li>
+
+                        <li class="facebook"><a target="_blank" href="http://www.facebook.com/share.php?u=<?php echo $this->url('events/event', array('slug'=>$event->getSlug()), array('force_canonical' => true)) ?>"><i class="fa fa-facebook"></i></a></li>
+                        <li class="twitter"><a target="_blank" href="http://twitter.com/home?status=<?php echo urlencode(sprintf($this->translate('New event on iTango website! Look it at %s'), $this->url('events/event', array('slug'=>$event->getSlug()), array('force_canonical' => true)))) ?>"><i class="fa fa-twitter"></i></a></li>
+
+                    </ul>
+                </div>
+
+            </li>
+        <?php endforeach; ?>
+        </div>
+    </ul>
+<?php endif; ?>
+
+<div class="clearfix"></div>

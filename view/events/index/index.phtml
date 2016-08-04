@@ -1,0 +1,42 @@
+<?php $paginator = $this->paginator; ?>
+<br/>
+<?php if(!empty($paginator)): ?>
+    <div class="row">
+        <div id="container" class="container">
+
+        <?php foreach ($paginator as $event): ?>
+                    <div class="item col-xs-12 col-md-4">
+                        <div class=""><h4><i class="fa fa-calendar"></i> <a href="/events/<?php echo $event->getSlug(); ?>.html"><?php echo $event->getTitle() ?></a></h4></div>
+                        <h4><small><b><?php echo $event->category ?></b></small></h4>
+                        
+                        <?php if($event->getFile()): ?>
+                            <div class="form-group">
+                                <div class=""><img class="img-responsive img-rounded" src="<?php echo $event->getFile() ?>"></div>
+                            </div>
+                        <?php else: ?>
+                            <div><img class="img-responsive img-rounded" src="http://placehold.it/350x200/efefef" /></div>
+                        <?php endif; ?>
+                        <?php 
+                            $start = $this->datetime($event->getStart(), "d M Y");
+                            $end = $this->datetime($event->getEnd(), "d M Y");
+                        ?>
+                        <?php if($start == $end): ?>
+                                <div class="label label-default"><i class="fa fa-calendar"></i> <?php echo $this->datetime($event->getStart(), "d M Y") ?></div>
+                                <div class="label label-success"><i class="fa fa-clock-o"></i> <?php echo $this->datetime($event->getStart(), "H:i") ?></div>
+                                <div class="label label-danger"><i class="fa fa-clock-o"></i> <?php echo $this->datetime($event->getEnd(), "H:i") ?></div>
+                        <?php else: ?>
+                            <div class="label label-success"><i class="fa fa-calendar"></i> <?php echo $this->datetime($event->getStart(), "d M Y H:i") ?></div>
+                            <div class="label label-danger"><i class="fa fa-calendar"></i> <?php echo $this->datetime($event->getEnd(), "d M Y H:i") ?></div>
+                        <?php endif; ?>
+                        <div class="strip-content"><p class="text-justify"><?php echo $this->extract($event->getContent(), 220) ?></p></div>
+                        <small><?php echo $this->tags($event->getTags()) ?></small>
+                    </div>
+            <?php endforeach;?>
+        
+        </div>
+    </div>
+    <hr/>
+    <div class="text-center paginator">
+        <?php echo $this->paginationControl($this->paginator, 'Sliding', 'events/partial/paginator_layout', array('route' => 'events/paginator')); ?>
+    </div>
+<?php endif; ?>

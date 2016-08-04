@@ -1,0 +1,70 @@
+.btn {
+	margin-bottom: 5px;
+}
+
+.img-container {
+	max-height: 175px; overflow: hidden;
+}
+
+.paginator {
+	margin-bottom: 100px;
+}
+
+.img-within-content {
+	margin-right: 10px; margin-bottom: 10px;
+}
+
+.menu-container .nav>li>a {
+	padding: 10px 10px;
+}
+
+.menu-container {
+	background-color: #efefef;
+}
+
+#eventsclosetome {
+
+}
+
+.buttoncontainer {
+	margin: 5px; text-align: center;
+}
+
+.help-header {
+	background-color: #efefef; padding: 15px;
+	margin-bottom: 10px;
+}
+
+.snippetcode {
+	border: 0 none; color: #0000ff; font-weight: 400;
+	width: 100%; cursor: pointer;
+}
+
+.panel-default:hover {
+	border: 1px solid #ff0000;
+}
+
+.snippetcode:hover {
+	color: #555555;
+}
+
+.snippetcode,.snippetcode:focus {
+	-webkit-touch-callout: none; -webkit-user-select: none;
+	-khtml-user-select: none; -moz-user-select: none;
+	-ms-user-select: none; user-select: none;
+	outline-style: none; /*IE*/
+}
+
+.searchbox{
+	background-color: #efefef;
+    padding: 5px;
+	margin-bottom: 15px;
+	border: 1px solid #e2e2e2;
+}
+
+.vcenter {
+	display: inline;
+	vertical-align: middle;
+	float: none;
+	padding-top: 5px;
+}

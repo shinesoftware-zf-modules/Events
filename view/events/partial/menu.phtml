@@ -1,0 +1,22 @@
+
+<ul class="nav nav-pills">
+    <li role="presentation"><a href="<?php echo $this->url('profile') ?>"><i class="fa fa-user"></i>  <span class="hidden-xs"><?php echo $this->translate('Profile'); ?></span></a></li> 
+    <li role="presentation"><a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" href="#"><i class="fa fa-calendar"></i>  <span class="hidden-xs"><?php echo $this->translate('Events'); ?></span> <span class="caret"></span></a> 
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="<?php echo $this->url('myevents/default') ?>add"><i class="fa fa-calendar"></i> <?php echo $this->translate('Add a new event'); ?></a></li>
+            <li><a href="<?php echo $this->url('myevents') ?>"><i class="fa fa-calendar"></i> <?php echo $this->translate('Confirmed Events'); ?></a></li>
+            <li><a href="<?php echo $this->url('myevents') ?>/social"><i class="fa fa-calendar"></i> <?php echo $this->translate('Pending Events'); ?></a></li>
+        </ul>
+    </li>
+    <li role="presentation"><a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" href="#"><i class="fa fa-users"></i>  <span class="hidden-xs"><?php echo $this->translate('Social Network'); ?></span> <span class="caret"></span></a> 
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="<?php echo $this->url('instagram') ?>"><i class="fa fa-instagram"></i> <?php echo $this->translate('Instagram Sync'); ?></a></li>
+            <li><a href="<?php echo $this->url('spotify') ?>"><i class="fa fa-spotify"></i> <?php echo $this->translate('Spotify Sync'); ?></a></li>
+            <li><a href="<?php echo $this->url('facebook') ?>"><i class="fa fa-facebook"></i> <?php echo $this->translate('Facebook Events Sync'); ?></a></li>
+            <li><a href="<?php echo $this->url('google/default') ?>"><i class="fa fa-google"></i> <?php echo $this->translate('Google Calendar Sync'); ?></a></li>
+        </ul>
+    </li>
+    <li role="presentation"><a href="<?php echo $this->url('zfcuser/changepassword') ?>"><i class="fa fa-key"></i>  <span class="hidden-xs"><?php echo $this->translate('Change Password'); ?></span></a></li>
+    <li role="presentation"><a href="<?php echo $this->url('zfcuser/changeemail') ?>"><i class="fa fa-envelope"></i>  <span class="hidden-xs"><?php echo $this->translate('Change Email'); ?></span></a></li>
+    <li role="presentation"><a href="<?php echo $this->url('zfcuser/logout') ?>"><i class="fa fa-sign-out"></i>  <span class="hidden-xs"><?php echo $this->translate('Sign Out'); ?></span></a></li>
+</ul>

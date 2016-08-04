@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-warning">
+            <?php echo $this->translate('There were one or more issues with your submission. Please correct them as indicated below.') ?>
+        </div>
+        <?php foreach ($this->errormessages as $field => $errors): ?>
+            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i>
+                <strong><?php echo $form->get($field)->getLabel() ?></strong>:
+                <?php foreach ($errors as $error): ?>
+                    <?php echo $error ?>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>

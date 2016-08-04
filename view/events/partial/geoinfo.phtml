@@ -1,0 +1,3 @@
+<?php if ($this->data): ?>
+    <a href="http://www.google.com/maps/place/<?php echo $this->data['latitude'] ?>,<?php echo $this->data['longitude'] ?>"><?php echo !empty($this->data['city']) ? $this->data['city'] : '-' ?></a>
+<?php endif; ?>

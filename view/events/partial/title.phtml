@@ -1,0 +1,66 @@
+<?php $event = $this->event; ?>
+<?php $parent = $this->parent; ?>
+
+<h2>
+    <?php if($event->socialnetwork == "google"): ?>
+        <i title="<?php echo $this->translate('Posted by Google Calendar') ?>" class="fa fa-calendar"></i>
+    <?php elseif($event->socialnetwork == "facebook"): ?>
+        <i title="<?php echo $this->translate('Posted by Facebook') ?>" class="fa fa-facebook"></i>
+    <?php else: ?>
+         <i title="<?php echo $this->translate('Posted manually by the user') ?>" class="fa fa-calendar-o"></i>
+    <?php endif; ?> 
+
+    <a href="/events/<?php echo $event->getSlug()?>.html"><?php echo $event->getTitle() ?></a> <small><a href="/profile/<?php echo $event->profile_slug ?>.html"><?php echo $event->profile_name?></a></small>
+</h2>
+    
+<div class="pull-right"><?php echo $this->tags($event->getTags()) ?></div> 
+<div class="pull-right"><div class="label label-default"><?php echo $event->category ?></div></div> 
+
+<?php 
+
+    $start = $this->datetime($event->getStart(), "dd MM Y");
+    $end = $this->datetime($event->getEnd(), "dd MM Y");
+
+    // if the event has a recurrence we will get the next event 
+    $datetime1 = new \Datetime("now");
+    $datetime2 = new \Datetime($event->getStart());
+    if($event->getRecurrence()){
+        $newRecurrence = $this->whenoccurrence($datetime2, $event->getRecurrence(), 1, true);
+        if(!empty($newRecurrence[0])){
+            $datetime2 = $newRecurrence[0];
+        }
+    }
+    
+    $interval = $datetime1->diff($datetime2)->format('%a');
+    $distance = $this->distance($event->getLatitude(), $event->getLongitude());
+?>
+<?php if($start == $end): ?>
+    <div class="label label-success"><?php echo ($this->datetime($event->getStart(), "kk:mm") == "24:00" ? "" : $this->datetime($event->getStart(), "dd MMM Y kk:mm")) ?></div>
+    <div class="label label-danger"><?php echo ($this->datetime($event->getEnd(), "kk:mm") == "24:00" ? "" : $this->datetime($event->getEnd(), "dd MMM Y kk:mm")) ?></div>
+<?php else: ?>
+
+    <?php if($event->getRecurrence()): ?>
+        <?php echo $this->whenoccurrence($datetime2, $event->getRecurrence(), 1); ?>
+        <div class="label label-danger"><i class="fa fa-calendar"></i> <?php echo $this->datetime($event->getEnd(), "dd MMM Y kk:mm") ?></div>
+    <?php else: ?>
+        <div class="label label-success"><i class="fa fa-calendar"></i> <?php echo $this->datetime($event->getStart(), "dd MMM Y kk:mm") ?></div>
+        <div class="label label-danger"><i class="fa fa-calendar"></i> <?php echo $this->datetime($event->getEnd(), "dd MMM Y kk:mm") ?></div>
+    <?php endif; ?>
+<?php endif; ?>
+                
+<?php $recurrence = $this->recurrence($event->getStart(), $event->getEnd(), $event->getRecurrence()); ?>
+<?php if($recurrence): ?><div class="label label-default"><small><?php echo $recurrence?></small></div><?php endif; ?>
+
+
+<?php if((int)$interval > 0): ?>
+    <div class="label label-primary"><?php echo sprintf($this->translate("%s day(s) from today"), $interval); ?></div>
+<?php else: ?>
+    <div class="label label-success"><?php echo $this->translate("today"); ?></div>
+<?php endif; ?>
+
+<?php if(!empty($distance)): ?><span class="label label-info" title="<?php echo $this->translate('distance of the event from you')?>"><i class="fa fa-location-arrow"></i> <?php echo $distance?></span><?php endif; ?>
+
+<?php if($event->getUrl()): ?>
+    <div class="label "><i class="fa fa-link"></i> <a target="_blank" href="<?php echo $event->getUrl()?>"><?php echo $event->getUrl()?></a></div>
+<?php endif; ?>
+<hr/>

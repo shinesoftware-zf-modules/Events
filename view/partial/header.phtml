@@ -1,0 +1,69 @@
+<?php $this->translate('Share your tango events'); ?>
+<?php $this->translate('a new way to share tango events'); ?>
+
+<nav class="navbar navbar-default navbar-fixed-top" id="event-nav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button data-target="#navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand" title="<?php echo $this->translate($this->settings('slogan')); ?>"><?php echo $this->settings('name'); ?></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="navbar-collapse-1" class="collapse navbar-collapse">
+           <?php echo $this->navigation('navigation')
+                ->menu()
+                ->setPartial('application/partial/menu.phtml')
+                ->setUlClass('nav navbar-nav navbar-nav-left')
+                ->render();
+             ?>
+             <ul class="nav navbar-nav navbar-right">
+             <?php if($this->zfcUserIdentity()): ?>
+                     
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" href="#"><i class="fa fa-calendar"></i>  <span class="hidden-sm hidden-md"><?php echo $this->translate('Event Manager'); ?></span> <span class="caret"></span></a> 
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo $this->url('myevents/default') ?>add"><i class="fa fa-calendar"></i> <?php echo $this->translate('Add a new event'); ?></a></li>
+                            <li><a href="<?php echo $this->url('myevents') ?>"><i class="fa fa-calendar"></i> <?php echo $this->translate('Confirmed Events'); ?></a></li>
+                            <li><a href="<?php echo $this->url('myevents') ?>/social"><i class="fa fa-calendar"></i> <?php echo $this->translate('Pending Events'); ?></a></li>
+                        </ul>
+                    </li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" href="#"><i class="fa fa-users"></i>  <span class="hidden-sm hidden-md"><?php echo $this->translate('Social Network'); ?></span> <span class="caret"></span></a> 
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?php echo $this->url('instagram') ?>"><i class="fa fa-instagram"></i> <?php echo $this->translate('Instagram Sync'); ?></a></li>
+                            <li><a href="<?php echo $this->url('spotify') ?>"><i class="fa fa-spotify"></i> <?php echo $this->translate('Spotify Sync'); ?></a></li>
+                            <li><a href="<?php echo $this->url('facebook') ?>"><i class="fa fa-facebook"></i> <?php echo $this->translate('Facebook Events Sync'); ?></a></li>
+                            <li><a href="<?php echo $this->url('google/default') ?>"><i class="fa fa-google"></i> <?php echo $this->translate('Google Calendar Sync'); ?></a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> <span class="hidden-sm hidden-md"><?php echo $this->translate('Profile') ?></span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/profile" title="<?php echo $this->translate('Profile') ?>">
+                                <i class="fa fa-user"></i> <?php echo $this->translate('Profile') ?></a>
+                            </li>
+                            
+                            <li><a href="<?php echo $this->url('zfcuser/changepassword') ?>"><i class="fa fa-key"></i>  <?php echo $this->translate('Change Password'); ?></a></li>
+                            <li><a href="<?php echo $this->url('zfcuser/changeemail') ?>"><i class="fa fa-envelope"></i> <?php echo $this->translate('Change Email'); ?></a></li>
+                            <li><a href="/user/logout" title="<?php echo $this->translate('Sign Out') ?>">
+                                <i class="fa fa-sign-out"></i> <?php echo $this->translate('Sign Out') ?></a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                 <?php else: ?>
+                        <li class="dropdown">
+                            <a href="/user"><?php echo $this->translate('Log In') ?></a>
+                        </li>
+                 <?php endif; ?>
+             </ul>
+             <?php // echo $this->localeMenu()->setUlClass('nav navbar-nav navbar-right') ?>
+             <?php echo $this->languages(); ?>
+        </div>
+        <!-- /.navbar-collapse -->
+</nav>
+

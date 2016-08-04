@@ -1,0 +1,269 @@
+@import url("http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,400italic");
+
+.event-list {
+    list-style: none;
+    font-family: 'Lato', sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+.event-list > li {
+    background-color: rgb(255, 255, 255);
+    padding: 0px;
+    margin: 0px 0px 20px;
+    border: 1px solid #efefef;
+}
+
+.event-list > li > time {
+    display: inline-block;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    background-color: #dadce1;
+    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.event-list > li > time.today {
+    background-color: rgb(64, 131, 221) !important;
+}
+
+.event-list > li:nth-child(even) > time {
+    background-color: #c2c4c9;
+}
+
+.event-list > li > time > span {
+    display: none;
+}
+
+.event-list > li > time > .dayoftheweek {
+    display: block;
+    font-size: 11pt;
+    font-weight: 100;
+    line-height: 1;
+    padding-top: 8px;
+}
+.event-list > li > time > .day {
+    display: block;
+    font-size: 46pt;
+    font-weight: 100;
+    line-height: 1;
+    padding-top: 0px;
+}
+
+.event-list > li time > .month {
+    display: block;
+    font-size: 20pt;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.event-list > li > img {
+    width: 100%;
+}
+
+.event-list > li > .info {
+    padding: 5px 8px 5px 8px;
+    text-align: left;
+}
+
+.event-list > li > .info > .title {
+    font-size: 17pt;
+    font-weight: 700;
+    margin: 0px;
+}
+
+.event-list > li > .info > .subtitle {
+    font-size: 9px;
+    margin-left: 2px;
+}
+
+.event-list > li > .info > .desc p {
+    line-height: 1.3
+}
+
+.event-list > li > .info > .desc {
+    font-size: 11pt;
+    font-weight: 300;
+    margin: 4px 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.event-list > li > .info > ul,
+.event-list > li > .social > ul {
+    display: table;
+    list-style: none;
+    margin: 10px 0px 0px;
+    padding: 0px;
+    width: 100%;
+    text-align: center;
+}
+
+.event-list > li > .social > ul {
+    margin: 0px;
+}
+
+.event-list > li > .info > ul > li,
+.event-list > li > .social > ul > li {
+    display: table-cell;
+    font-size: 11pt;
+    padding: 3px 0px;
+}
+
+.event-list > li > .info > ul > li > a {
+    display: block;
+    width: 100%;
+    color: rgb(30, 30, 30);
+    text-decoration: none;
+}
+
+.event-list > li > .social > ul > li {
+    padding: 0px;
+}
+
+.event-list > li > .info > ul > li:hover,
+.event-list > li > .social > ul > li:hover,
+.event-list > li > .social > ul > li > a:hover {
+    color: #ffffff;
+    background-color: #969696 !important;
+}
+
+.facebook a,
+.twitter a,
+.google-plus a {
+    display: block;
+    width: 100%;
+    color: rgb(75, 110, 168) !important;
+}
+
+.twitter a {
+    color: rgb(79, 213, 248) !important;
+}
+
+.google-plus a {
+    color: rgb(221, 75, 57) !important;
+}
+
+.facebook:hover a {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(75, 110, 168) !important;
+}
+
+.twitter:hover a {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(79, 213, 248) !important;
+}
+
+.google-plus:hover a {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(221, 75, 57) !important;
+}
+
+.event-list > li > .social ul.nav li {
+    padding-right: 0px;
+}
+
+.dropdown-menu-right {
+    left: 0;
+    right: auto;
+}
+
+@media (min-width: 768px) {
+
+    .event-list > li > .info > .subtitle {
+        font-size: 10px;
+        margin-left: 10px;
+    }
+
+    .dropdown-menu-right {
+        right: 0;
+        left: auto;
+    }
+
+    .event-list > li > .social ul.nav li {
+        padding-right: 5px;
+    }
+
+    .event-list > li > .social > ul > li > a {
+        padding: 3px 0px;
+    }
+
+    .event-list > li {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 120px;
+        padding: 0px;
+    }
+
+    .event-list > li > time,
+    .event-list > li > img {
+        display: inline-block;
+    }
+
+    .event-list > li > time,
+    .event-list > li > img {
+        width: 120px;
+        float: left;
+    }
+
+    .event-list > li > .info {
+        background-color: rgb(245, 245, 245);
+        overflow: hidden;
+    }
+
+    .event-list > li > time,
+    .event-list > li > img {
+        width: 120px;
+        height: 120px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .event-list > li > .info {
+        position: relative;
+        height: 120px;
+        text-align: left;
+        padding-right: 50px;
+    }
+
+    .event-list > li > .info > .title,
+    .event-list > li > .info > .desc {
+        padding: 4px 10px
+    }
+
+    .event-list > li > .info > ul {
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+    }
+
+    .event-list > li > .social {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        display: block;
+        width: 40px;
+    }
+
+    .event-list > li > .social > ul {
+        border-left: 1px solid rgb(230, 230, 230);
+    }
+
+    .event-list > li > .social > ul > li {
+        display: block;
+        padding: 0px;
+    }
+
+    .event-list > li > .social > ul > li > a {
+        display: block;
+        width: 40px;
+        padding: 10px 0px 9px;
+    }
+
+    .event-list > li > .social ul.nav li {
+        padding-right: 0px;
+    }
+}

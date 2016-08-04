@@ -1,0 +1,56 @@
+<?php $this->headTitle()->prepend('Tango Events')?>
+
+<?php $this->headMeta()->appendName('keywords', $this->settings('metakeywords'))
+                       ->appendName('description', $this->settings('metadescription'))
+                       ->appendName('viewport', 'width=device-width, initial-scale=1.0'); ?>
+
+<?php
+
+    $form = $this->form;
+    $form->prepare();
+    $form->setAttribute('action', $this->url(NULL, array( 'action' => 'process')));
+    $form->setAttribute('method', 'post');
+?>
+
+<div class="container">
+    <div class="col-12-lg eventlist">
+        <?php echo $this->partial('events/partial/search.phtml'); ?>
+
+
+        <h4><?php echo $this->translate('Upcoming Events') ?>
+            <?php if (!empty($this->coords)): ?>
+                <?php echo $this->geolocalization($this->coords['latitude'], $this->coords['longitude']); ?>
+            <?php else: ?>
+                <small><?php echo $this->translate('Discover all the upcoming events!') ?></small>
+            <?php endif; ?>
+        </h4>
+
+        <div id="eventsclosetome"><?php echo $this->translate('Open your GPS connection and we will show you all events close to you.') ?></div>
+        <div class="buttoncontainer">
+            <p class="findnearme btn btn-primary">
+                <i class="fa fa-bullseye"></i> <?php echo $this->translate('Find near me') ?>
+            </p>
+            <a class="btn btn-success" href="/myevents/add"><i class="fa fa-plus-square"></i> <strong><?php echo strtoupper($this->translate('Post a tango event!')) ?></strong></a>
+        </div>
+        <hr/>
+
+        <div class="visible-xs visible-sm visible-md">
+
+            <h5><?php echo $this->translate('Events far from you') ?>
+                <small><?php echo $this->translate('Discover all the events far from you!') ?></small>
+            </h5>
+            <?php echo $this->partial('events/partial/listnew.phtml'); ?>
+        </div>
+        <div class="visible-lg">
+
+            <h4><?php echo $this->translate('Events far from you') ?>
+                <small><?php echo $this->translate('Discover all the events far from you!') ?></small>
+            </h4>
+            <?php echo $this->partial('events/partial/tablelist.phtml'); ?>
+
+        </div>
+
+    </div>
+</div>
+
+<?php echo $this->richsnippets($this->events); ?>

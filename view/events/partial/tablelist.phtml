@@ -1,0 +1,88 @@
+<?php
+
+$paginator = $this->events;
+
+$today = new \Datetime("now");
+?>
+<?php if (!empty($paginator) && $paginator->count()): ?>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th><i class="fa fa-calendar"></i> <?php echo $this->translate('Date') ?></th>
+                <th><?php echo $this->translate('Category') ?></th>
+                <th><?php echo $this->translate('Venue') ?></th>
+                <th><?php echo $this->translate('Details') ?></th>
+            </tr>
+            </thead>
+            <?php foreach ($paginator as $event): ?>
+
+                <?php $distance = $this->distance($event->getLatitude(), $event->getLongitude()); ?>
+                <?php
+                $start = $this->datetime($event->getStart(), "d MMM Y");
+                $end = $this->datetime($event->getEnd(), "d MMM Y");
+
+                $today = new \Datetime("now");
+                $eventstart = new \Datetime($event->getStart());
+
+                if ($event->getRecurrence()) {
+                    $newRecurrence = $this->whenoccurrence($eventstart, $event->getRecurrence(), 1, true);
+                    if (!empty($newRecurrence[0])) {
+                        $eventstart = $newRecurrence[0];
+                    }
+                }
+
+                $interval = $today->diff($eventstart);
+                $recurrence = $this->recurrence($event->getStart(), $event->getEnd(), $event->getRecurrence());
+                $content = preg_replace("/<br\W*?\/>/", "\n", $event->getContent());
+
+               /*
+                \Zend\Debug\Debug::dump($eventstart->format('Y-m-d H:i:s'));
+                \Zend\Debug\Debug::dump($today->format('Y-m-d H:i:s'));
+                \Zend\Debug\Debug::dump($interval->format('%d day %h hours %i minutes'));
+                die;
+               */
+
+                $content = strtolower($content);
+                ?>
+                <tbody>
+
+                <tr>
+                    <td>
+
+                        <?php if ($start == $end): ?>
+                            <div class="label label-default"><?php echo $this->datetime($event->getStart(), "d MMM Y") ?></div>
+                            <div class="label label-success"><?php echo ($this->datetime($event->getStart(), "kk:mm") == "24:00" ? "" : $this->datetime($event->getStart(), "kk:mm")) ?></div>
+                            <div class="label label-danger"><?php echo ($this->datetime($event->getEnd(), "kk:mm") == "24:00" ? "" : $this->datetime($event->getEnd(), "kk:mm")) ?></div>
+                        <?php else: ?>
+
+                            <?php if ($event->getRecurrence()): ?>
+                                <?php echo $this->whenoccurrence($eventstart, $event->getRecurrence(), 1); ?>
+                            <?php else: ?>
+                                <div class="label label-default"><?php echo $this->datetime($today->format('Y-m-d H:i:s'), "dd MMM Y") ?></div> <div class="label label-success"><?php echo $this->datetime($event->getStart(), "kk:mm") ?></div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+
+                    </td>
+
+                    <td><div class="label <?php echo $event->cssclass ?>"><?php echo empty($event->category) ? $this->translate('Milonga') : $event->category ?></div></td>
+                    <td><a href="/events/<?php echo $event->getSlug(); ?>.html"><?php echo $this->Extract($event->getAddress(), 20) ?></a></td>
+                    <td>
+                        <a href="/events/<?php echo $event->getSlug(); ?>.html"><?php echo $this->Extract($event->getTitle(), 50); ?></a>
+                    </td>
+
+                </tr>
+
+                </tbody>
+            <?php endforeach; ?>
+        </table>
+
+        <?php if(!empty($paginator)): ?>
+            <div class="text-center paginator">
+                <?php echo $this->paginationControl($paginator, 'Sliding', 'events/partial/paginator_layout', array('route' => 'events/paginator')); ?>
+            </div>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+

@@ -1,0 +1,34 @@
+{
+  "name": "shinesoftware-zf-modules/events",
+  "description": "Personal data module written for the Zend Framework projects",
+  "license": "BSD-2-Clause",
+  "type": "library",
+  "minimum-stability": "dev",
+  "keywords": [
+    "zf2",
+    "Events module for Zf2"
+  ],
+  "homepage": "http://github.com/shinesoftware-zf-modules/Events",
+  "authors": [
+    {
+      "name": "Michelangelo Turillo",
+      "email": "info@shinesoftware.com",
+      "homepage": "http://shinesoftware.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "tplaner/when": "2.*",
+    "paypal/adaptivepayments-sdk-php":"*",
+    "simshaun/recurr": "dev-master",
+    "google/apiclient": "dev-master"
+  },
+  "autoload": {
+    "psr-0": {
+      "Events": "src/"
+    },
+    "classmap": [
+      "./Module.php"
+    ]
+  }
+}

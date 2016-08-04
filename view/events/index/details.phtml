@@ -1,0 +1,65 @@
+<?php $event = $this->event; ?>
+<?php $parent = $this->parent; ?>
+<?php $plainDescription = str_replace("\n", " ", substr(strip_tags($event->getContent()), 0, 100)); ?>
+<?php $this->headMeta()->setName('description', $plainDescription); ?>
+<?php $this->headTitle()->append($event->category . " " . $event->getCity() . " " . $event->country); ?>
+
+<div class="container">
+    <div class="row">
+    	<div class="col-md-8">
+    		<?php echo $this->partial('events/partial/title.phtml'); ?>
+    		 <div class="text-justify">
+    	        <?php 
+    	            $content = $event->getContent();
+    	            $content = $this->youtube($content);
+    	            $content = $this->spotifybutton($content);
+    	            $content = $this->instabutton($content);
+    	            echo $content;
+    	        ?>
+
+				<?php echo $this->instawidgetbytag($event->getUserid(), $event->getContent());?>
+
+    	        <?php echo $this->block('leftside'); ?>
+
+                <?php echo $this->eventsrelated($event->getId()); ?>
+
+    	        <?php #echo $this->disqus(); ?>
+
+
+    	    </div>
+    	</div>
+    	
+    	<div class="col-md-4">
+
+			<?php if($event->getFile()): ?>
+				<hr/><img class="img-responsive img-rounded img-within-content" src="<?php echo $event->getFile() ?>">
+			<?php endif; ?>
+
+			<?php if($event->paypal): ?>
+                <?php echo $this->paypal($event->paypal, null, $event->getTitle(), $event->getContent()) ?>
+            <?php endif; ?>
+
+            <?php echo $this->partial('events/partial/address.phtml'); ?>
+            <?php echo $this->partial('events/partial/contacts.phtml'); ?>
+            
+            <hr/>
+            <?php echo $this->block('rightside'); ?>
+            
+            <?php echo $this->playlistsfromtext($event->getUserid(), $event->getContent());?>
+            
+            <?php echo $this->instawidget($event->getUserid(), $event->getContent());?>
+
+    		<?php if(!empty($parent)): ?>
+                <h4><i class="fa fa-calendar"></i> <?php echo $this->translate('Events Related'); ?></h4>
+    			<a href="<?php echo $parent->getSlug() ?>.html"><?php echo $parent->getTitle() ?></a><br/>
+    		<?php endif; ?>
+
+
+    	</div>
+    	
+    </div>
+    
+</div>
+
+
+<?php echo $this->richsnippets(array($event)); ?>

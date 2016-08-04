@@ -1,0 +1,5 @@
+<?php if($this->data): ?>
+
+    <small><?php echo !empty($this->data) ? sprintf($this->translate('Your location is %s'), "<strong>" . $this->data[3]->long_name . "</strong> (" . $this->data[5]->long_name . ") - ") . sprintf($this->translate("%s km radius from you"), $this->km) : null?></small>
+
+<?php endif; ?>

@@ -1,0 +1,56 @@
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="help-header">
+            <h4><i class="fa fa-book"></i> <?php echo $this->translate('Help guide for event entries')?></h4>
+            <p><?php echo $this->translate('When you try to create a new event maybe you will need to include some photo, video, tickets or music. Follow this simple rules to create a good event webpage.')?></p>
+            <p><?php echo $this->translate('You can start from the description of the event, writing the venue, a phone contact and attaching a photo. Then you can see the event page by a simple click at the event title shown above.')?></p>
+        </div>
+        <p class="btn btn-success" id="help"><i class="fa fa-book"></i> <?php echo $this->translate('Show/Hide Help guide')?></p>
+        <hr/>
+        <div id="helpdescription" style="display: none;">
+            <h5><i class="fa fa-youtube"></i> <?php echo $this->translate('Attach a YouTube Video')?></h5>
+            <p><?php printf( $this->translate('If you need to attach a video on your new event page, you will upload your own video at YouTube %s service and then copy the YouTube link in the event description.'), "<a target='_blank' href='http://www.youtube.com'><i class='fa fa-external-link-square'></i></a>")?></p>
+            <div class="panel panel-default panel-snippet" title="<?php echo $this->translate('Click here to add this text into your event description') ?>">
+                <div class="panel-body">
+                    <input type="text" class="snippetcode" value="https://www.youtube.com/watch?v=_4G03HpzArc" />
+                </div>    
+            </div>    
+            
+            <h5><i class="fa fa-instagram"></i> <?php echo $this->translate('Attach a set of photo by Instagram')?></h5>
+            <p><?php printf( $this->translate('If you need to attach a list of your photos by the Instagram service on your new event page, you need an Instagram %s profile and the link of your Instagram user page. You can show the photos of the other users knowing only their profile link.'), "<a target='_blank' href='http://www.instagram.com'><i class='fa fa-external-link-square'></i></a>")?></p>
+            <div class="panel panel-default panel-snippet" title="<?php echo $this->translate('Click here to add this text into your event description') ?>">
+                <div class="panel-body">
+                    <input type="text" class="snippetcode" value="http://www.instagram.com/instatango" />
+                </div>    
+            </div>    
+            
+            <h5><i class="fa fa-spotify"></i> <?php echo $this->translate('If you need to attach the playlist you can use Spotify!')?></h5>
+            <p><?php printf( $this->translate('If your musicalizador needs to promote himself/herself by the event you can use the Spotify service %s. Register yourself on Spotify.com and create your own playlist (not collaborative playlist). Then copy the playlist link in the content of the event.'), "<a target='_blank' href='https://www.spotify.com/it/signup/'><i class='fa fa-external-link-square'></i></a>")?></p>
+            <div class="panel panel-default panel-snippet" title="<?php echo $this->translate('Click here to add this text into your event description') ?>">
+                <div class="panel-body">
+                    <input type="text" class="snippetcode" value="http://open.spotify.com/user/1172633665/playlist/06ILuqOdtGUHTwGF9hxFZ7">
+                </div>    
+            </div>    
+            
+            <h5><i class="fa fa-paypal"></i> <?php echo $this->translate('Request the payment of one or more tickets for the event')?></h5>
+            <p><?php printf($this->translate('If the event needs a ticket you can use the Paypal service %s. Set your Paypal email account into your own profile page and write a simple sentence as shown in the following example. Each sentence shown below must be written within the description of the event. one ticket description per line. Pay attention! there is no space between the currency symbol and the value'), "<a target='_blank' href='https://www.paypal.com/signup/account'><i class='fa fa-external-link-square'></i></a>")?></p>
+            <div class="panel panel-default panel-snippet" title="<?php echo $this->translate('Click here to add this text into your event description') ?>">
+                <div class="panel-body">
+                    <input type="text" class="snippetcode" value="<?php printf($this->translate('€%s drink included'), "10.50")?>" />
+                </div>    
+            </div>    
+            <div class="panel panel-default panel-snippet" title="<?php echo $this->translate('Click here to add this text into your event description') ?>">
+                <div class="panel-body">
+                    <input type="text" class="snippetcode" value="<?php printf($this->translate('$%s single supplement'), "80")?>" />
+                </div>    
+            </div>    
+            <div class="panel panel-default panel-snippet" title="<?php echo $this->translate('Click here to add this text into your event description') ?>">
+                <div class="panel-body">
+                    <input type="text" class="snippetcode" value="<?php printf($this->translate('£%s 7 Nights Accommodations - 5 stars hotel'), "850")?>" />
+                </div>    
+            </div>    
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<?php 
+
+    $events = $this->data; 
+    foreach ($events as $event){
+        echo '<div class="dtstart label label-success" title="'.$this->translate('Next recurrence of the event') .'">' . $event->format('d M Y H:i:s') . '</div>';
+    }
+

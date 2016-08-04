@@ -1,0 +1,22 @@
+<?php $event = $this->event; ?>
+
+<?php if($event->getContact()): ?>
+    <h4><i class="fa fa-phone"></i> <?php echo $this->translate('Contact Information')?></h4>
+    <p><?php echo $this->translate('Telephone') ?> <i class="fa fa-phone"></i> <a href="skype:<?php echo $event->getContact()?>?call"><?php echo $event->getContact()?></a></p>
+<?php endif; ?>
+
+<?php if($event->googleplus): ?>
+    <a class="label label-success" target="_blank" href="https://plus.google.com/<?php echo $event->googleplus?>"><i class="fa fa-google"></i> <?php echo $event->googleplus?></a>
+<?php endif; ?>
+
+<?php if($event->facebook): ?>
+    <a class="label label-primary" target="_blank" href="https://www.facebook.com/<?php echo $event->facebook?>"><i class="fa fa-facebook"></i> Facebook</a>
+<?php endif; ?>
+
+<?php if($event->instagram): ?>
+    <a class="label label-default" target="_blank" href="https://www.instagram.com/<?php echo $event->instagram?>"><i class="fa fa-instagram"></i> <?php echo $event->instagram?></a>
+<?php endif; ?>
+
+<?php if($event->twitter): ?>
+    <a class="label label-warning" target="_blank" href="https://www.twitter.com/<?php echo $event->twitter?>"><i class="fa fa-twitter"></i> <?php echo $event->twitter?></a>
+<?php endif; ?>
