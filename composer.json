@@ -16,12 +16,21 @@
       "homepage": "http://shinesoftware.com"
     }
   ],
+
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/shinesoftware-zf-modules/Instagram"
+    }
+
+  ],
   "require": {
     "php": ">=5.4",
     "tplaner/when": "2.*",
     "paypal/adaptivepayments-sdk-php":"*",
     "simshaun/recurr": "dev-master",
-    "google/apiclient": "dev-master"
+    "google/apiclient": "dev-master",
+    "shinesoftware-zf-modules/instagram": "dev-master"
   },
   "autoload": {
     "psr-0": {
